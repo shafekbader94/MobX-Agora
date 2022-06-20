@@ -4,10 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+
+import { Inventory  } from '../src/store/Inventory';
+
+let InventoryList = new Inventory()
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <App store = {InventoryList}/>
   </React.StrictMode>
 );
 
