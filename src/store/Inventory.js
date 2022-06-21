@@ -1,4 +1,4 @@
-import { observable, makeObservable, action } from "mobx";
+import { observable, makeObservable, action, computed } from "mobx";
 import { Item } from "./Item";
 
 export class Inventory {
@@ -10,6 +10,7 @@ export class Inventory {
       addItem: action,
       buyItem: action,
       changePrice: action,
+      numItems: computed,
     });
   }
 
@@ -36,4 +37,10 @@ export class Inventory {
     const item = this.items.find((i) => i.name === name);
     item.price = price;
   };
+
+  get numItems() {
+    let total = 0;
+    this.items.forEach((u) => (total =  total + u.quantity));
+    return total;
+  }
 }

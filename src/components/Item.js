@@ -1,14 +1,14 @@
 import React from "react";
-import { observer } from "mobx-react";
+import { observer, inject } from "mobx-react";
 
 function Item(props) {
   const { name, price, quantity } = props.data;
 
-  const buyItem = () => props.store.buyItem(name);
+  const buyItem = () => props.Inventory.buyItem(name);
 
   const changePrice = () => {
     const price = prompt("New price");
-    props.store.changePrice(name, price);
+    props.Inventory.changePrice(name, price);
   };
 
   return (
@@ -19,4 +19,4 @@ function Item(props) {
   );
 }
 
-export default observer(Item);
+export default inject("Inventory")(observer(Item))

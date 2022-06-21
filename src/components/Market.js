@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { observer } from "mobx-react";
+import { observer, inject } from "mobx-react";
 import Item from "./Item";
+
 
 function Market(props) {
   const [itemName, setItemName] = useState("");
@@ -12,7 +13,7 @@ function Market(props) {
   const enterPress = (e) => {
     if (e.key === "Enter") {
       console.log(props);
-      props.store.addItem(itemName);
+      props.Inventory.addItem(itemName);
       setItemName("");
     }
   };
@@ -28,14 +29,14 @@ function Market(props) {
           onKeyPress={enterPress}
         />
       </div>
-
+<h4>Number of items: {props.Inventory.numItems}</h4>
       <ul>
-        {props.store.items.map((i, index) => (
-          <Item store={props.store} data={i} key={index} />
+        {props.Inventory.items.map((i, index) => (
+          <Item  data={i} key={index} />
         ))}
       </ul>
     </div>
   );
 }
 
-export default observer(Market);
+export default inject("Inventory")(observer(Market))
